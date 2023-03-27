@@ -1,0 +1,235 @@
+openapi: "3.0.3"
+info:
+  title: "Demo_Task_3 API"
+  description: "Demo_Task_3 API"
+  version: "1.0.0"
+servers:
+- url: "https://Demo_Task_3"
+paths:
+  /promo:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/PromoActionSummaryData"
+    post:
+      description: ""
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                type: "integer"
+                format: "int64"
+  /promo/{promoId}:
+    delete:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "204":
+          description: "No Content"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+    get:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "404":
+          description: "Not Found"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PromoActionData"
+    put:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "204":
+          description: "No Content"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /promo/{promoId}/participant:
+    post:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                type: "integer"
+                format: "int64"
+  /promo/{promoId}/participant/{participantId}:
+    delete:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      - name: "participantId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "204":
+          description: "No Content"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /promo/{promoId}/prize:
+    post:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "201":
+          description: "Created"
+          content:
+            '*/*':
+              schema:
+                type: "integer"
+                format: "int64"
+  /promo/{promoId}/prize/{prizeId}:
+    delete:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      - name: "prizeId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "204":
+          description: "No Content"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+  /promo/{promoId}/raffle:
+    post:
+      description: ""
+      parameters:
+      - name: "promoId"
+        in: "path"
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/RaffleResultData"
+        "409":
+          description: "Conflict"
+          content:
+            '*/*':
+              schema:
+                type: "object"
+components:
+  schemas:
+    PromoActionSummaryData:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+    PrizeData:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        description:
+          type: "string"
+    ParticipantData:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+    PromoActionData:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        prizes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PrizeData"
+        participants:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ParticipantData"
+    RaffleResultData:
+      type: "object"
+      properties:
+        winner:
+          $ref: "#/components/schemas/ParticipantData"
+        prize:
+          $ref: "#/components/schemas/PrizeData"
