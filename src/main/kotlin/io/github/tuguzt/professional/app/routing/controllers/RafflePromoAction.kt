@@ -15,6 +15,14 @@ import org.koin.ktor.ext.inject
 fun Route.rafflePromoAction() {
     val interactor: RafflePromoAction by inject()
 
+    /**
+     * Проведение розыгрыша призов в промоакции по идентификатору промоакции.
+     *
+     * Проведение розыгрыша возможно только в том случае, когда
+     * количество участников и призов в промоакции совпадает
+     * (т.е., например, если в промоакции в текущий момент
+     * 2 участника и 2 приза или 3 участника и 3 приза и т.д.).
+     */
     post<Promo.Id.Raffle> {
         val id = PromoActionId(it.parent.promoId)
         try {

@@ -8,7 +8,8 @@ servers:
 paths:
   /promo:
     get:
-      description: ""
+      description: "Получение краткой информации (без информации об участниках и п\
+        ризах) <br> обо всех промоакциях."
       responses:
         "200":
           description: "OK"
@@ -19,7 +20,9 @@ paths:
                 items:
                   $ref: "#/components/schemas/PromoActionSummaryData"
     post:
-      description: ""
+      description: "Добавление промоакции с возможностью указания названия (name),\
+        \ описания (description). <br> Описание – не обязательный параметр, назван\
+        ие – обязательный."
       responses:
         "201":
           description: "Created"
@@ -30,7 +33,7 @@ paths:
                 format: "int64"
   /promo/{promoId}:
     delete:
-      description: ""
+      description: "Удаление промоакции по идентификатору."
       parameters:
       - name: "promoId"
         in: "path"
@@ -45,7 +48,8 @@ paths:
               schema:
                 type: "object"
     get:
-      description: ""
+      description: "Получение полной информации (с информацией об участниках и при\
+        зах) <br> о промоакции по идентификатору."
       parameters:
       - name: "promoId"
         in: "path"
@@ -66,7 +70,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/PromoActionData"
     put:
-      description: ""
+      description: "Редактирование промоакции по идентификатору промоакции. <br> Р\
+        едактировать можно только свойства name, description. <br> Удалить имя так\
+        им образом нельзя, описание – можно."
       parameters:
       - name: "promoId"
         in: "path"
@@ -82,7 +88,8 @@ paths:
                 type: "object"
   /promo/{promoId}/participant:
     post:
-      description: ""
+      description: "Добавление участника в промоакцию по идентификатору промоакции\
+        ."
       parameters:
       - name: "promoId"
         in: "path"
@@ -99,7 +106,8 @@ paths:
                 format: "int64"
   /promo/{promoId}/participant/{participantId}:
     delete:
-      description: ""
+      description: "Удаление участника из промоакции по идентификаторам промоакции\
+        \ и участника."
       parameters:
       - name: "promoId"
         in: "path"
@@ -120,7 +128,7 @@ paths:
                 type: "object"
   /promo/{promoId}/prize:
     post:
-      description: ""
+      description: "Добавление приза в промоакцию по идентификатору промоакции."
       parameters:
       - name: "promoId"
         in: "path"
@@ -137,7 +145,8 @@ paths:
                 format: "int64"
   /promo/{promoId}/prize/{prizeId}:
     delete:
-      description: ""
+      description: "Удаление приза из промоакции по идентификаторампромоакции и пр\
+        иза."
       parameters:
       - name: "promoId"
         in: "path"
@@ -158,7 +167,11 @@ paths:
                 type: "object"
   /promo/{promoId}/raffle:
     post:
-      description: ""
+      description: "Проведение розыгрыша призов в промоакции по идентификатору про\
+        моакции. <br> Проведение розыгрыша возможно только в том случае, когда <br>\
+        \ количество участников и призов в промоакции совпадает <br> (т.е., наприм\
+        ер, если в промоакции в текущий момент <br> 2 участника и 2 приза или 3 уч\
+        астника и 3 приза и т.д.)."
       parameters:
       - name: "promoId"
         in: "path"

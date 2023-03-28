@@ -15,6 +15,9 @@ import org.koin.ktor.ext.inject
 fun Route.createPrize() {
     val interactor: CreatePrize by inject()
 
+    /**
+     * Добавление приза в промоакцию по идентификатору промоакции.
+     */
     post<Promo.Id.Prize> {
         val promoId = PromoActionId(it.parent.promoId)
         val body = call.receive<NewPrizeData>()

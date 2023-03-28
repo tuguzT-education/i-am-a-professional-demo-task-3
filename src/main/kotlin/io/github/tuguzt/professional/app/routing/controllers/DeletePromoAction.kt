@@ -13,6 +13,9 @@ import org.koin.ktor.ext.inject
 fun Route.deletePromoAction() {
     val interactor: DeletePromoAction by inject()
 
+    /**
+     * Удаление промоакции по идентификатору.
+     */
     delete<Promo.Id> {
         val id = PromoActionId(it.promoId)
         interactor.deletePromoAction(id)

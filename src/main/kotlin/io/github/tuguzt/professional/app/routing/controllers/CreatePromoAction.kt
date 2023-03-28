@@ -14,6 +14,10 @@ import org.koin.ktor.ext.inject
 fun Route.postPromoAction() {
     val interactor: CreatePromoAction by inject()
 
+    /**
+     * Добавление промоакции с возможностью указания названия (name), описания (description).
+     * Описание – не обязательный параметр, название – обязательный.
+     */
     post<Promo> {
         val body = call.receive<NewPromoActionData>()
         val new = CreatePromoAction.NewPromoAction(

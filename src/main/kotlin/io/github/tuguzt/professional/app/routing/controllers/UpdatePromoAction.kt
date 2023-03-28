@@ -15,6 +15,11 @@ import org.koin.ktor.ext.inject
 fun Route.updatePromoAction() {
     val interactor: UpdatePromoAction by inject()
 
+    /**
+     * Редактирование промоакции по идентификатору промоакции.
+     * Редактировать можно только свойства name, description.
+     * Удалить имя таким образом нельзя, описание – можно.
+     */
     put<Promo.Id> {
         val id = PromoActionId(it.promoId)
         val body = call.receive<UpdatePromoActionData>()

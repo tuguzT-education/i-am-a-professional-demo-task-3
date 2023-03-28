@@ -15,6 +15,9 @@ import org.koin.ktor.ext.inject
 fun Route.createParticipant() {
     val interactor: CreateParticipant by inject()
 
+    /**
+     * Добавление участника в промоакцию по идентификатору промоакции.
+     */
     post<Promo.Id.Participant> {
         val promoId = PromoActionId(it.parent.promoId)
         val body = call.receive<NewParticipantData>()

@@ -14,6 +14,9 @@ import org.koin.ktor.ext.inject
 fun Route.deleteParticipant() {
     val interactor: DeleteParticipant by inject()
 
+    /**
+     * Удаление участника из промоакции по идентификаторам промоакции и участника.
+     */
     delete<Promo.Id.Participant.Id> {
         val promoId = PromoActionId(it.parent.parent.promoId)
         val id = ParticipantId(it.participantId)

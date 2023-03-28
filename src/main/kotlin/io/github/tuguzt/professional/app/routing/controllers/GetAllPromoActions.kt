@@ -13,6 +13,10 @@ import org.koin.ktor.ext.inject
 fun Route.getAllPromoActions() {
     val interactor: GetAllPromoActions by inject()
 
+    /**
+     * Получение краткой информации (без информации об участниках и призах)
+     * обо всех промоакциях.
+     */
     get<Promo> {
         val summary = interactor.getAllPromoActions().map { (id, name, description) ->
             PromoActionSummaryData(id.value, name, description)

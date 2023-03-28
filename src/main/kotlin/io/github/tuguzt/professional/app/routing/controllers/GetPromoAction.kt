@@ -14,6 +14,10 @@ import org.koin.ktor.ext.inject
 fun Route.getPromoAction() {
     val interactor: GetPromoAction by inject()
 
+    /**
+     * Получение полной информации (с информацией об участниках и призах)
+     * о промоакции по идентификатору.
+     */
     get<Promo.Id> {
         val id = PromoActionId(it.promoId)
         when (val promoAction = interactor.getPromoAction(id)) {
