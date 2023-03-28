@@ -1,0 +1,20 @@
+name: task-3
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URI: jdbc:postgresql://database:5432/task-3?user=postgres
+      DATABASE_DRIVER: org.postgresql.Driver
+    depends_on:
+      database:
+        condition: service_healthy
+  database:
+    image: postgres
+    environment:
+      POSTGRES_DB: task-3
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
